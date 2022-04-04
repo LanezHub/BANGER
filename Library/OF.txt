@@ -1,0 +1,81 @@
+local Toolbar = plugin:CreateToolbar("LanezHub.Key")
+local Button = Toolbar:CreateButton("Settings", "", "rbxassetid://4478857065", "Random.lua")
+local Opened = false
+
+local NotesWidgetInfo = DockWidgetPluginGuiInfo.new(
+	Enum.InitialDockState.Left,
+	false,   -- Widget will be initially enabled
+	true,  -- Don't override the previous enabled state
+	150,    -- Default width of the floating window
+	150,    -- Default height of the floating window
+	100,    -- Minimum width of the floating window (optional)
+	100     -- Minimum height of the floating window (optional)
+)
+
+function nubset(set)
+	if math.random(unpack(set)) == 1 then
+		return math.random(0,9)
+	else
+		return string.char(math.random(65,90))
+	end
+end
+
+function RandomUsername(length)
+	local STR = ''
+	local SHOW = ""
+	for i = 1, length do
+		STR = STR .. nubset({1,2})
+	end
+	for i = 1,string.len(STR),1 do
+		local STRING = string.sub(STR,i,i)
+		if math.random(1,2) == 1 then
+			SHOW = SHOW..string.lower(STRING)
+		else
+			SHOW = SHOW..STRING
+		end
+	end
+	return SHOW
+end
+
+function RandomPassword(length)
+	local STR = ''
+	for i = 1, length do
+		STR = STR .. math.random(0,9)
+	end
+	for i = 1, 2 do
+		if i == 2 then
+			STR = STR .. string.lower(string.char(math.random(65,90)))
+		else
+			STR = STR .. string.char(math.random(65,90))
+		end
+	end
+	return STR
+end
+
+local Widget = plugin:CreateDockWidgetPluginGui("Settings", NotesWidgetInfo)
+Widget.Title = "GameSettings"
+local Gui = script.Parent.Lanez
+Gui.Parent = Widget
+
+Gui.Random.MouseButton1Click:Connect(function()
+	local F = Instance.new("Folder",game:GetService("TestService"))
+	F.Name = math.random(16, 24)..".Key"
+	local ID = Instance.new("StringValue",F)
+	ID.Name = "Username";ID.Value = RandomUsername(math.random(8, 12))
+	local Pass = Instance.new("StringValue",F)
+	Pass.Name = "Password";
+	for i = 1, 8 do
+		Pass.Value = RandomPassword(math.random(8,10))
+	end
+	F.Name = "User : "..ID.Value
+end)
+
+Button.Click:Connect(function()
+	if Opened then
+		Widget.Enabled = false
+		Opened = false
+	else
+		Widget.Enabled = true
+		Opened = true
+	end
+end)
