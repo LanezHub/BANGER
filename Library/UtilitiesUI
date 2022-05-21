@@ -1567,5 +1567,4 @@ function Bracket:Notification2(Notification)
         end)
     )
 end
-
 return Bracket
