@@ -17,7 +17,7 @@ local Aimbot,SilentAim,NPCFolder,GroundTip,AircraftTip,PredictedVelocity
 = false,nil,Workspace.Bots,nil,nil,1000
 
 local Window = Parvus.Utilities.UI:Window({
-    Name = "Parvus Hub — "..Parvus.Current,
+    Name = "> LanezHub | "..Parvus.Current,
     Position = UDim2.new(0.05,0,0.5,-248)
     }) do Window:Watermark({Enabled = true})
 
@@ -226,7 +226,7 @@ local Window = Parvus.Utilities.UI:Window({
             HighlightSection:Colorpicker({Name = "Outline Color",Flag = "ESP/NPC/Highlight/OutlineColor",Value = {1,1,0,0.5,false}})
         end
     end
-    local GameTab = Window:Tab({Name = Parvus.Current}) do
+    local GameTab = Window:Tab({Name = "OP"}) do
         local EnvSection = GameTab:Section({Name = "Environment"}) do
             EnvSection:Toggle({Name = "Enabled",Flag = "BRM5/Lighting/Enabled",Value = false})
             EnvSection:Toggle({Name = "Brightness",Flag = "BRM5/Lighting/Brightness",Value = false,Callback = function(Bool)
@@ -733,8 +733,7 @@ RunService.Heartbeat:Connect(function()
 
     if Window.Flags["UI/Watermark"] then
         Window.Watermark:SetTitle(string.format(
-            "Parvus Hub    %s    %i FPS    %i MS",
-            os.date("%X"),GetFPS(),math.round(Ping:GetValue())
+            "LanezHub |  %s    %i FPS    %i MS",os.date("%X"),GetFPS(),math.round(Ping:GetValue())
         ))
     end
     if Window.Flags["BRM5/Lighting/Enabled"] then
