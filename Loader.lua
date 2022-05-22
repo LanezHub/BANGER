@@ -17,14 +17,12 @@ local out = script_details.debug and function(T, ...)
 return warn("[LanezHub - Debug]: "..T:format(...)) end or function() end
 local function Importing(file)
     out("Importing File \"%s\"", file)
-    -- return task.spawn(function()
     local x, a = pcall(function()
         return loadstring(game:HttpGet(url .. file))()
     end)
     if not x then
         return warn('failed to import', file)
     end
-    -- end)
 end
 local function Searchfile(file)
     out("Importing File \"%s\"", file)
@@ -37,11 +35,11 @@ local function Searchfile(file)
     return a
 end
 
-getgenv().Parvus = {Loaded = false,Debug = false,Current = "Loader",Utilities = {}}
-getgenv().LanezHub = getgenv().Parvus
+getgenv().Parvus = {Loaded = false,Debug = false,Current = "Loader",Utilities = {}} getgenv().LanezHub = getgenv().Parvus
 Parvus.Utilities.UI = Parvus.Debug and Importing("/Library/UtilitiesUI") or loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Library/UtilitiesUI"))()
 Parvus.Utilities.UI2 = Parvus.Debug and Importing("/Library/loader.lua") or loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Library/loader.lua"))()
 Parvus.Utilities.Drawing = Parvus.Debug and Importing("/Library/Drawing") or loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Library/Drawing"))()
+Parvus.Utilities.AimBot = Parvus.Debug and Importing("/ModuleScript/AimBot.lua") or loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/ModuleScript/AimBot.lua"))()
 Parvus.Utilities.SetupFPS = function()
     local StartTime,TimeTable,
     LastTime = os.clock(), {}
@@ -75,6 +73,14 @@ Parvus.Games = {
         Name = "Those Who Remain",
         Script = Parvus.Debug and Searchfile("/Game/Those%20Who%20Remain.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Game/Those%20Who%20Remain.lua")
     },
+    ["1494262959"] = {
+        Name = "Criminality",
+        Script = Parvus.Debug and Searchfile("/Game/Criminality.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Game/Criminality.lua")
+    },
+    ["113491250"] = {
+        Name = "Phantom Forces",
+        Script = Parvus.Debug and Searchfile("/Game/Phantom%20Forces.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Game/Phantom%20Forces.lua")
+    },
 }
 
 local PlayerService = game:GetService("Players")
@@ -90,7 +96,7 @@ end
 LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
         local QueueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport
-        QueueOnTeleport(Parvus.Debug and game:HttpGetAsync("https://raw.githubusercontent.com/AlexR32/Parvus/main/Loader.lua"))
+        QueueOnTeleport(Parvus.Debug and Searchfile("/Loader.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Loader.lua"))
     end
 end)
 
