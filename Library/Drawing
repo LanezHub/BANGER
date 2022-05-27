@@ -46,9 +46,7 @@ function ModelManager(Mode,Model)
         LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
     else
         local Humanoid = NPC:FindFirstChildOfClass("Humanoid")
-        return Model, NPC:FindFirstChild("HumanoidRootPart") or false,
-        (Humanoid and Humanoid.Health > 0) or false,
-        true, Color3.new(1,1,1)
+        return Model, NPC:FindFirstChild("HumanoidRootPart") or false,(Humanoid and Humanoid.Health > 0) or false, true, Color3.new(1,1,1)
     end
 end
 
@@ -142,11 +140,8 @@ if game.GameId == 580765040 then
                 InEnemyTeam, PlayerColor = true, Model.Character.Torso.Color
             end
         end
-
         return Model.Character,
-        (Model.Character and Model.Character:FindFirstChild("HumanoidRootPart")) or false,
-        (Model.Character and Model.Character:FindFirstChildOfClass("Humanoid") and
-        Model.Character:FindFirstChildOfClass("Humanoid").Health > 0) or false,
+        (Model.Character and Model.Character:FindFirstChild("HumanoidRootPart")) or false,(Model.Character and Model.Character:FindFirstChildOfClass("Humanoid") and Model.Character:FindFirstChildOfClass("Humanoid").Health > 0) or false,
         InEnemyTeam, PlayerColor
     end
 elseif game.GameId == 1054526971 then
@@ -168,6 +163,28 @@ elseif game.GameId == 1054526971 then
             Color3.new(1,1,1)
         end
     end
+elseif game.GameId == 113491250 then
+    local client = {}; do
+		for i,v in pairs(getgc(true)) do
+			if (type(v) == "table") then
+				if rawget(v, "getbodyparts") then
+					client.chartable = debug.getupvalue(v.getbodyparts, 1)
+                elseif rawget(v, "getplayerhit") then
+                    client.replication = v
+                else rawget(v, "getplayerhealth") then
+                    client.hud = v
+				end
+			end
+		end
+	end
+    function ModelManager(Mode,Model)
+        local Characters = debug.getupvalue(client.replication.getplayerhit, 1)
+        return Model.Character,
+        (Model.Character and Model.Character:FindFirstChild("Torso")) or false,
+        (Model.Character and client.hud:getplayerhealth(Characters[client.chartable[Model]]) > 0) or false,
+        LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
+    end
+    Character,PrimaryPart,IsAlive,InEnemyTeam,TeamColor = ModelManager(ESP.Mode,Model)
 elseif game.GameId == 1168263273 then
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     repeat task.wait() until ReplicatedStorage:FindFirstChild("TS")
