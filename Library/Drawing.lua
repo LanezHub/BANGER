@@ -168,6 +168,13 @@ elseif game.GameId == 1054526971 then
             Color3.new(1,1,1)
         end
     end
+elseif game.GameId == 113491250 then
+    function ModelManager(Mode,Model)
+        return Model.Character,
+        (Model.Character and Model.Character:FindFirstChild("Head")) or false,
+        (Model.Character and Model.Character:FindFirstChild("Torso")) or false,
+        LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
+    end
 elseif game.GameId == 1168263273 then
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     repeat task.wait() until ReplicatedStorage:FindFirstChild("TS")
