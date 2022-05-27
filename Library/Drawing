@@ -164,24 +164,10 @@ elseif game.GameId == 1054526971 then
         end
     end
 elseif game.GameId == 113491250 then
-    local client = {}; do
-		for i,v in pairs(getgc(true)) do
-			if (type(v) == "table") then
-				if rawget(v, "getbodyparts") then
-					client.chartable = debug.getupvalue(v.getbodyparts, 1)
-                elseif rawget(v, "getplayerhit") then
-                    client.replication = v
-                else rawget(v, "getplayerhealth") then
-                    client.hud = v
-				end
-			end
-		end
-	end
     function ModelManager(Mode,Model)
-        local Characters = debug.getupvalue(client.replication.getplayerhit, 1)
         return Model.Character,
+        (Model.Character and Model.Character:FindFirstChild("Head")) or false,
         (Model.Character and Model.Character:FindFirstChild("Torso")) or false,
-        (Model.Character and client.hud:getplayerhealth(Characters[client.chartable[Model]]) > 0) or false,
         LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
     end
     Character,PrimaryPart,IsAlive,InEnemyTeam,TeamColor = ModelManager(ESP.Mode,Model)
