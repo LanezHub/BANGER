@@ -46,7 +46,9 @@ function ModelManager(Mode,Model)
         LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
     else
         local Humanoid = NPC:FindFirstChildOfClass("Humanoid")
-        return Model, NPC:FindFirstChild("HumanoidRootPart") or false,(Humanoid and Humanoid.Health > 0) or false, true, Color3.new(1,1,1)
+        return Model, NPC:FindFirstChild("HumanoidRootPart") or false,
+        (Humanoid and Humanoid.Health > 0) or false,
+        true, Color3.new(1,1,1)
     end
 end
 
@@ -140,8 +142,11 @@ if game.GameId == 580765040 then
                 InEnemyTeam, PlayerColor = true, Model.Character.Torso.Color
             end
         end
+
         return Model.Character,
-        (Model.Character and Model.Character:FindFirstChild("HumanoidRootPart")) or false,(Model.Character and Model.Character:FindFirstChildOfClass("Humanoid") and Model.Character:FindFirstChildOfClass("Humanoid").Health > 0) or false,
+        (Model.Character and Model.Character:FindFirstChild("Torso")) or false,
+        (Model.Character and Model.Character:FindFirstChildOfClass("Humanoid") and
+        Model.Character:FindFirstChildOfClass("Humanoid").Health > 0) or false,
         InEnemyTeam, PlayerColor
     end
 elseif game.GameId == 1054526971 then
@@ -163,14 +168,6 @@ elseif game.GameId == 1054526971 then
             Color3.new(1,1,1)
         end
     end
-elseif game.GameId == 113491250 then
-    function ModelManager(Mode,Model)
-        return Model.Character,
-        (Model.Character and Model.Character:FindFirstChild("Head")) or false,
-        (Model.Character and Model.Character:FindFirstChild("Torso")) or false,
-        LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
-    end
-    Character,PrimaryPart,IsAlive,InEnemyTeam,TeamColor = ModelManager(ESP.Mode,Model)
 elseif game.GameId == 1168263273 then
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
     repeat task.wait() until ReplicatedStorage:FindFirstChild("TS")
