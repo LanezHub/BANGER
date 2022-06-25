@@ -132,8 +132,8 @@ LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 local SupportedGame = IfGameSupported()
-if SupportedGame then LoadScript(SupportedGame)
-    Parvus.Utilities.UI:Notification({
+if SupportedGame then
+    LoadScript(SupportedGame) Parvus.Utilities.UI:Notification({
         Title = "LanezHub",
         Description = Parvus.Current .. " loaded!",
         Duration = 5
