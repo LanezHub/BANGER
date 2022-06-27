@@ -128,7 +128,7 @@ local LocalPlayer = PlayerService.LocalPlayer
 
 Parvus.Utilities.UI:Notification({
     Title = "LanezHub",
-    Description = "Library | Bracket V3 (Parvus Hub Edition)",
+    Description = "Bracket V3 (Parvus Hub Edition)",
     Duration = 5
 })
 
