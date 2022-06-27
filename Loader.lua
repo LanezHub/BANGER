@@ -117,6 +117,10 @@ Parvus.Games = {
         Name = "Phantom Forces",
         Script = Parvus.Debug and Searchfile("/Game/Phantom%20Forces.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Game/Phantom%20Forces.lua")
     },
+    ["65708455"] = {
+        Name = "Rise of the Dead",
+        Script = Parvus.Debug and Searchfile("/Game/Rise%20of%20the%20Dead.lua") or game:HttpGetAsync("https://raw.githubusercontent.com/LanezHub/BANGER/main/Game/Rise%20of%20the%20Dead.lua")
+    },
 }
 
 local PlayerService = game:GetService("Players")
