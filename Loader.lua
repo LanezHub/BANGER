@@ -56,6 +56,7 @@ Parvus.Utilities.SetupFPS = function()
         return os.clock() - StartTime >= 1 and #TimeTable or #TimeTable / (os.clock() - StartTime)
     end
 end
+
 Parvus.Utilities.NewThreadLoop = function(Wait,Function)
     coroutine.wrap(function()
         while task.wait(Wait) do
@@ -66,6 +67,7 @@ Parvus.Utilities.NewThreadLoop = function(Wait,Function)
         end
     end)()
 end
+
 Parvus.Utilities.RequireModule = function(Name)
     for Index, Instance in pairs(getloadedmodules()) do
         if Instance.Name == Name then
@@ -82,6 +84,7 @@ Parvus.Utilities.HookSignal = function(Signal,Index,Callback)
         OldConnection(unpack(args))
     end)
 end
+
 Parvus.Utilities.HookFunction = function(Module,Function,Callback)
     Module = Parvus.Utilities.RequireModule(Module) local OldFunction
     while task.wait() do
@@ -118,6 +121,13 @@ Parvus.Games = {
 
 local PlayerService = game:GetService("Players")
 local LocalPlayer = PlayerService.LocalPlayer
+
+Parvus.Utilities.UI:Notification({
+    Title = "LanezHub",
+    Description = "Library | Bracket V3 (Parvus Hub Edition)",
+    Duration = 5
+})
+
 function IfGameSupported()
     for Id, Info in pairs(Parvus.Games) do
         if tostring(game.GameId) == Id then
