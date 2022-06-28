@@ -45,8 +45,8 @@ function ModelManager(Mode,Model)
         Model.Character:FindFirstChildOfClass("Humanoid").Health > 0) or false,
         LocalPlayer.Team ~= Model.Team, Model.TeamColor.Color
     else
-        local Humanoid = NPC:FindFirstChildOfClass("Humanoid")
-        return Model, NPC:FindFirstChild("HumanoidRootPart") or false,
+        local Humanoid = Model:FindFirstChildOfClass("Humanoid")
+        return Model, Model:FindFirstChild("HumanoidRootPart") or false,
         (Humanoid and Humanoid.Health > 0) or false,
         true, Color3.new(1,1,1)
     end
