@@ -464,8 +464,8 @@ RunService.Heartbeat:Connect(function()
                             ESP.Drawing.Other.Tracer.Color = Color
                             ESP.Drawing.Other.Tracer.Thickness = ESP.Config[ESP.ConfigName.."/Tracer/Thickness"]
                             ESP.Drawing.Other.Tracer.Transparency = 1-ESP.Config[ESP.ConfigName.."/Tracer/Transparency"]
-                            ESP.Drawing.Other.Tracer.From = ESP.Config[ESP.ConfigName.."/Tracer/Mode"][1] == "From Mouse" and UserInputService:GetMouseLocation()
-                            or ESP.Config[ESP.ConfigName.."/Tracer/Mode"][1] == "From Bottom" and Vector2.new(Camera.ViewportSize.X / 2,Camera.ViewportSize.Y)
+                            ESP.Drawing.Other.Tracer.From = ESP.Config[ESP.ConfigName.."/Tracer/Mode"] == "From Mouse" and UserInputService:GetMouseLocation()
+                            or ESP.Config[ESP.ConfigName.."/Tracer/Mode"] == "From Bottom" and Vector2.new(Camera.ViewportSize.X / 2,Camera.ViewportSize.Y)
                             ESP.Drawing.Other.Tracer.To = Vector2.new(HeadPosition.X,HeadPosition.Y)
                         end
                     end
